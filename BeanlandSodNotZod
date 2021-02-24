@@ -1,0 +1,351 @@
+package edu.cpt167.beanland.exercise6;
+
+import java.util.Scanner;
+
+public class BeanlandMainClass 
+{
+    //Begin Main Method
+	public static void main(String[] args) 
+	{
+		//Constants
+		final double TAX_RATE = .075;
+		final String DISCOUNT_NAME_MEMBER = "Member";
+		final String DISCOUNT_NAME_SENIOR = "Senior";
+		final String DISCOUNT_NAME_NONE = "No Discount";
+		final String DISCOUNT_NAME_QUIT = "Quit";
+		final double DISCOUNT_RATE_MEMBER = 0.15;
+		final double DISCOUNT_RATE_SENIOR = 0.25;
+		final double DISCOUNT_RATE_NONE = 0.0;
+		final String ITEM_NAME_PREMIUM = "Premium item";
+		final String ITEM_NAME_SPECIAL = "Special item";
+		final String ITEM_NAME_BASIC = "Basic item";
+		final String ITEM_NAME_RETURN = "Return to Main Menu";
+		final double ITEM_PRICE_PREMIUM = 55.95;
+		final double ITEM_PRICE_SPECIAL = 24.95;
+		final double ITEM_PRICE_BASIC = 15.95;
+		final int RESET_VALUE = 0;
+		
+		//Variables
+		String userName = "";
+		char rateSelection = ' ';
+		char itemSelection = ' ';
+		int howMany = 0;
+		String discountName = "";
+		double discountRate = 0.0;
+		String itemName = "";
+		double itemPrice = 0.0;
+		double discountAmount = 0.0;
+		double discountPrice = 0.0;
+		double subTotal = 0.0;
+		double tax = 0.0;
+		double totalCost = 0.0;
+		int memberCount = 0;
+		int seniorCount = 0;
+		int noDiscountCount = 0;
+		double grandTotal = 0.0;
+		int premiumCount = 0;
+		int specialCount = 0;
+		int basicCount = 0;
+		double purchaseAmount = 0.0;
+		
+		Scanner input = new Scanner(System.in);
+		
+		//Welcome Banner
+	    System.out.println("Welcome to our program!");
+		System.out.println("We hope it brings you great joy!");
+		
+		//INPUT
+		
+		//Ask for customer name
+		System.out.println("\nWhat is your name");
+		userName = input.next();
+		
+		//Discount menu
+	    System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    System.out.printf("\nDISCOUNT MENU");
+		System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		//Display 4 columns
+		//first: Left aligned to 0 minimum characters
+		//second: Right aligned to 5 minimum characters
+		//third: Right aligned as decimal to one place
+		//fourth: Right aligned to 1 minimum characters
+		System.out.printf("\n%s%5s%13.1f%1s", "[A] ", "for Member", DISCOUNT_RATE_MEMBER * 100, "%");
+		
+		//Display 4 columns
+		//first: Left aligned to 0 minimum characters
+		//second: Right aligned to 5 minimum characters
+		//third: Right aligned as a decimal to one place
+		//fourth: Right aligned to 1 minimum characters
+		System.out.printf("\n%s%5s%13.1f%1s", "[B] ", "for Senior", DISCOUNT_RATE_SENIOR * 100, "%");
+		
+		//Display 4 columns
+		//first: Left aligned to 0 minimum characters
+		//second: Right aligned to 5 minimum characters
+		//third: Right aligned as a decimal to one place
+		//fourth: Right aligned to 1 minimum characters
+		System.out.printf("\n%s%5s%8.1f%1s", "[C] ", "for No Discount", DISCOUNT_RATE_NONE * 100, "%");
+		
+		//Display 2 columns
+		//first: Left aligned to 0 minimum characters
+		//second: Right aligned to 5 minimum characters
+		System.out.printf("\n%s%5s", "[Q] ", "to Quit");
+
+		//End Discount menu
+	    System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	
+	    System.out.print("\nEnter your choice now ");
+	    rateSelection = input.next().toUpperCase().charAt(0);
+	    
+	    while (rateSelection != 'A' && rateSelection != 'B' && rateSelection != 'C' && rateSelection != 'Q')
+	    {
+	    	
+	            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	            System.out.println("The selection made is invalid. Please try again!");
+	            System.out.print("\nEnter your choice now: ");
+	            rateSelection = input.next().toUpperCase().charAt(0);
+	            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+         }
+	    
+	    while (rateSelection == 'Q')
+	    {
+	    	    System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Thank you for stopping by!");
+                System.out.printf("Come back any time");
+                System.exit(0);
+                rateSelection = input.next().toUpperCase().charAt(0);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); 
+	    }
+	    
+	    //Item menu
+	    System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    System.out.printf("\nITEM MENU");
+		System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    
+	    //Display 4 columns
+		//first: Left aligned 0 minimum characters
+		//second: right aligned 1 minimum character
+		//third: right aligned 13 minimum characters
+		//fourth: right aligned as a decimal to two places
+		System.out.printf("\n%s%1s%13s%1.2f", "[A] ", ITEM_NAME_PREMIUM, "$ ", ITEM_PRICE_PREMIUM);
+	    
+		//Display 4 columns
+		//first: left aligned 0 minimum character
+		//second: right aligned 1 minimum character
+		//third: right aligned 13 minimum character
+		//fourth: right aligned as a decimal to two places
+		System.out.printf("\n%S%1s%13s%1.2f", "[B] ", ITEM_NAME_SPECIAL, "$ ", ITEM_PRICE_SPECIAL);
+	
+	    //Display 4 columns
+		//first: left aligned 0 minimum character
+		//second: right aligned 1 minimum character
+		//third: right aligned 15 minimum character
+		//fourth: right aligned as a decimal to two places
+		System.out.printf("\n%s%1s%15s%1.2f", "[C] ", ITEM_NAME_BASIC, "$ ", ITEM_PRICE_BASIC);
+		
+		//Display 2 columns
+		//first: left aligned 0 minimum character
+		//second: right aligned 1 minimum character
+		System.out.printf("\n%s%1s", "[R] ", "to Return to Main Menu");
+		
+        System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    
+	    System.out.print("\nEnter your choice now ");
+	    itemSelection = input.next().toUpperCase().charAt(0);
+		
+	    System.out.println("\nHow many would you like");
+		howMany = input.nextInt();
+	    
+		
+	    while (itemSelection != 'A' && itemSelection != 'B' && itemSelection != 'C' && itemSelection != 'R')
+	    {
+	    	
+	            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	            System.out.println("The selection made is invalid. Please try again!");
+	            System.out.print("\nEnter your choice now: ");
+	            itemSelection = input.next().toUpperCase().charAt(0);
+	            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+         }
+	    
+	    while (itemSelection == 'R')
+	    {
+	    	    System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.printf("You are being redirected to main menu");
+                System.exit(0);
+                itemSelection = input.next().toUpperCase().charAt(0);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); 
+	    }
+		
+	    //selection structure
+	    
+	    //rate structure
+	    if (rateSelection == 'A')
+	    {
+	    	discountName = DISCOUNT_NAME_MEMBER;
+	    	discountRate = DISCOUNT_RATE_MEMBER;
+	    	memberCount++;
+	    }
+	    else if (rateSelection == 'B')
+	    {
+	    	discountName = DISCOUNT_NAME_SENIOR;
+	    	discountRate = DISCOUNT_RATE_SENIOR;
+	    	seniorCount++;
+	    }
+	    else
+	    {
+	    	discountName = DISCOUNT_NAME_NONE;
+	    	discountRate = DISCOUNT_RATE_NONE;
+	    	noDiscountCount++;
+	    }
+	    
+	    //item structure
+	    if (itemSelection == 'A')
+	    {
+	    	itemName = ITEM_NAME_PREMIUM;
+	    	itemPrice = ITEM_PRICE_PREMIUM;
+	    	premiumCount++;
+	    }
+	    else if (itemSelection == 'B')
+	    {
+	    	itemName = ITEM_NAME_SPECIAL;
+	    	itemPrice = ITEM_PRICE_SPECIAL;
+	    	specialCount++;
+	    }
+	    else
+	    {
+	    	itemName = ITEM_NAME_BASIC;
+	    	itemPrice = ITEM_PRICE_BASIC;
+	    	basicCount++;
+	    }
+	    
+	    //process
+	    discountAmount = itemPrice * discountRate;
+	    discountPrice = itemPrice - discountAmount;
+	    purchaseAmount = howMany * discountPrice;
+	    subTotal = subTotal + purchaseAmount;
+	    tax = subTotal * TAX_RATE;
+	    grandTotal = totalCost;
+	    totalCost = subTotal + tax;
+	    
+	    //Item report
+	  	System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+	  	System.out.printf("\nITEM REPORT");
+	  	System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~\n");
+		
+	  	//Display as 3 columns
+	  	//first: Left aligned 0 minimum character
+	  	//second: Right aligned 14 minimum characters
+	  	//third: Left aligned to 1 minimum character
+	  	System.out.printf("\n%s%14s%-1s", "Item Name", "", itemName);
+		
+	  	//Display as 3 columns
+	  	//first: Left aligned 0 minimum character
+	  	//second: Right aligned 11 minimum characters
+	  	//third: Right aligned to as decimal to two places
+	  	System.out.printf("\n%s%11s%8.2f", "Original Price", "$ ", ITEM_PRICE_PREMIUM);
+	  	
+	  	//Display as 3 columns
+	  	//first: Left aligned 0 minimum characters
+	  	//second: Right aligned 10 minimum characters
+	  	//third: Left aligned to 1 minimum character
+	  	System.out.printf("\n%s%10s%-1s", "Discount Type", "", discountName);
+		
+		//Display as 3 columns
+	  	//first: Left aligned 0 minimum characters
+	  	//second: Right aligned as a decimal to one place
+	  	//third: Right aligned to 1 minimum character
+	  	System.out.printf("\n%s%19s%1s", "Discount Rate", discountRate * 100, "%");
+		
+	  	//Display as 3 columns
+	  	//first: Left aligned 0 minimum character
+	  	//second: Right aligned 10 minimum characters
+	  	//third: Right aligned as a decimal to two decimal places
+	  	System.out.printf("\n%s%10s%8.2f", "Discount Amount", "$ ", discountAmount);
+	  	
+	  	//Display as 3 columns
+	  	//first: Left aligned to 0 minimum characters
+	  	//second: Right aligned 9 minimum character
+	  	//third: Right aligned as a decimal to two places
+	  	System.out.printf("\n%s%9s%8.2f", "Discounted Price", "$ ", discountPrice);
+	  	
+	  	//Display as 2 columns
+	  	//first: Left aligned to 0  minimum character
+	  	//second: Right aligned to 25 minimum character
+	  	System.out.printf("\n%s%25s", "Quantity", howMany);
+	  	
+	  	//Display as 3 columns
+	  	//first: Left aligned 0 minimum character
+	  	//second: Right aligned 10 minimum character
+	  	//third: Right aligned as decimal to two places
+	  	System.out.printf("\n%s%10s%8.2f", "Purchase Amount", "$ ", purchaseAmount);
+	  	
+	  	//Display as 3 columns
+	  	//first: Left aligned 0 minimum character
+	  	//second: Right aligned 17 minimum character
+	  	//third: Right aligned as decimal to two places
+	  	System.out.printf("\n%s%17s%8.2f", "Subtotal", "$ ", subTotal);
+	  	
+	    //Order report
+	    System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    System.out.printf("\nORDER REPORT");
+		System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	  	
+		//Display as 3 columns
+		//first: Left aligned 0 minimum character
+		//second: Right aligned 17 minimum character
+		//third: Left aligned to 1 minimum character
+		System.out.printf("\n%s%17s%-1s", "User", "",  userName);
+	  	
+		//Display as 3 columns
+		//first: Left aligned 0 minimum characters
+		//second: Right aligned 15 minimum characters
+		//third: Right aligned as a decimal to two decimal places
+		System.out.printf("\n%s%15s%8.2f", "Subtotal", "$ ", subTotal);
+	  	
+	    //Display as 3 columns
+		//first: Left aligned 0 minimum character
+		//second: Right aligned 20 minimum characters
+		//third: Right aligned as a decimal to two places
+		System.out.printf("\n%s%20s%8.2f", "Tax", "$ ", tax);
+		
+		//Display as 3 columns
+		//first: Left aligned 0 minimum character
+		//second: Right aligned 15 minimum character
+		//third: Right aligned as a decimal to two places
+		System.out.printf("\n%s%13s%8.2f", "Total Cost", "$ ", totalCost);
+		
+		System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		//Final report
+	  	System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~");
+	  	System.out.printf("\nFINAL REPORT");
+	  	System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~\n");
+		
+		System.out.printf("\nCount of discount types:");
+		
+		System.out.printf("\n%s%20s", "Member Count", memberCount);
+		System.out.printf("\n%s%20s", "Senior Count", seniorCount);
+		System.out.printf("\n%s%15s", "No Discount Count", noDiscountCount);
+		
+		System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~\n");
+		
+		System.out.printf("\nCount of item types");
+		System.out.printf("\n%s%14s", "Premium Item Count", premiumCount);
+		System.out.printf("\n%s%14s", "Special Item Count", specialCount);
+		System.out.printf("\n%s%16s", "Basic Item Count", basicCount);
+		
+		System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~\n");
+		
+		System.out.printf("\n%s%13s%8.2f", "Grand Total", "$ ", grandTotal);
+		
+		System.out.printf("\n~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~\n");
+		
+	    //Farewell banner
+	    System.out.printf("\nThank you for using our program");
+	    System.out.printf("\nWe hope it made you happy");
+		
+		
+		
+	}//End report method
+
+}//End of class
